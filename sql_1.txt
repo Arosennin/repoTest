@@ -1,0 +1,78 @@
+213.184.8.36
+login_linux_mysql:nazwiskoi jank adamn
+haslo_linux: ustawiles
+haslo_mysql: imie123#@!A
+LINUX:
+pwd - gdzie jestes (katalog)
+cd - zmiana katalogu
+ls - list
+cat _nazwa_ - otworz plik
+touch - tworzenie pliku
+passwd - zmiana haselka
+
+MYSQL:
+CREATE TABLE nazwa(kolumna typ_danych Klucz default 'domyslna');
+
+LEKCJA_1:
+
+ZADANIE 1:
+
+CREATE TABLE postac(id_postaci INT primary key NOT NULL AUTO_INCREMENT, nazwa varchar(40), 
+rodzaj enum('wiking', 'ptak', 'kobieta'), data_ur date, wiek int unsigned);
+
+INSERT INTO postac(nazwa,rodzaj,data_ur,wiek) values ('Bjorn','ptak','1000-12-12',5);
+
+INSERT INTO postac(nazwa,rodzaj,data_ur,wiek) values ('Drozd','ptak','1001-11-11',100);
+
+INSERT INTO postac(nazwa,rodzaj,data_ur,wiek) values ('Tesciowa','wiking','1200-12-12',800);
+
+update postac set wiek=88 where nazwa='Tesciowa';
+
+ZADANIE 2:
+
+CREATE TABLE walizka(id_walizki INT NOT NULL AUTO_INCREMENT,
+pojemnosc int unsigned, 
+kolor enum('rozowy', 'czerwony', 'teczowy', 'zolty'), 
+id_wlasciciela int,
+PRIMARY KEY(id_walizki),
+CONSTRAINT FK_WALIZKAPOSTAC FOREIGN KEY (id_wlasciciela) REFERENCES postac(id_postaci));
+
+ALTER TABLE walizka ALTER kolor SET DEFAULT 'rozowy';
+
+INSERT INTO walizka(pojemnosc, id_wlasciciela) VALUES (5,1);
+
+INSERT INTO walizka(pojemnosc, id_wlasciciela) VALUES (20,3);
+
+ZADANIE 3:
+
+CREATE TABLE izba(adres_budynku varchar(100) NOT NULL, 
+nazwa_izby varchar(100) NOT NULL, 
+metraz int unsigned, 
+wlasciciel int NULL,
+CONSTRAINT PK_izba PRIMARY KEY (adres_budynku, nazwa_izby),
+CONSTRAINT FK_izbaPostac FOREIGN KEY (wlasciciel) REFERENCES postac(id_postaci));
+
+ALTER TABLE izba ADD COLUMN kolor varchar(50) AFTER metraz;
+
+ALTER TABLE izba ALTER kolor SET DEFAULT 'czarny';
+
+INSERT INTO izba(adres_budynku, nazwa_izby, metraz, wlasciciel) VALUES
+('przygodowa 3', 'spizarnia', 25, 3);
+
+ZADANIE 4:
+
+CREATE TABLE przetwory(id_przetworu INT NOT NULL AUTO_INCREMENT, 
+rok_produkcji YEAR DEFAULT 1954, 
+id_wykonawcy int, 
+zawartosc varchar(255), 
+dodatek varchar(255) DEFAULT 'papryczka chilli', 
+id_konsumenta int,
+PRIMARY KEY(id_przetworu),
+CONSTRAINT FK_wynkonawcaPostac FOREIGN KEY(id_wykonawcy) REFERENCES postac(id_postaci),
+CONSTRAINT FK_konsumentPostac FOREIGN KEY(id_konsumenta) REFERENCES postac(id_postaci)
+);
+
+INSERT INTO przetwory(id_wykonawcy, zawartosc, id_konsumenta) VALUES
+(3, 'bigos', 1);
+
+ZADANIE 5:
