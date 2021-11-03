@@ -1,0 +1,30 @@
+INSERT INTO postac(nazwa,rodzaj,data_ur,wiek) values ('wiking1','wiking','1220-11-12',800);
+INSERT INTO postac(nazwa,rodzaj,data_ur,wiek) values ('wiking2','wiking','1210-12-06',800);
+INSERT INTO postac(nazwa,rodzaj,data_ur,wiek) values ('wiking3','wiking','1230-11-04',800);
+INSERT INTO postac(nazwa,rodzaj,data_ur,wiek) values ('wiking4','wiking','1240-12-12',800);
+INSERT INTO postac(nazwa,rodzaj,data_ur,wiek) values ('wiking5','wiking','1250-11-05',800);
+
+CREATE TABLE statek(nazwa_statku INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+rodzaj_statku enum('szybki', 'wolny'),
+data_wodowania date,
+max_ladownosc int unsigned);
+
+INSERT INTO statek(rodzaj_statku, data_wodowania, max_ladownosc) VALUES
+('szybki', '2012-01-09', 22);
+
+INSERT INTO statek(rodzaj_statku, data_wodowania, max_ladownosc) VALUES
+('wolny', '2012-01-09', 23);
+
+ALTER TABLE postac ADD COLUMN funkcja varchar(50);
+
+UPDATE postac SET funkcja='kapitan' WHERE nazwa='Bjorn';
+
+ALTER TABLE postac
+    ADD statek int,
+    ADD CONSTRAINT FOREIGN KEY(statek) REFERENCES statek(nazwa_statku);
+
+UPDATE postac SET statek=1;
+
+DELETE from izba where nazwa_izby='spizarnia';
+
+drop table izba;

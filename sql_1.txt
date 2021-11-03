@@ -1,6 +1,7 @@
 213.184.8.36
 login_linux_mysql:nazwiskoi jank adamn
 haslo_linux: ustawiles
+mysql -u
 haslo_mysql: imie123#@!A
 LINUX:
 pwd - gdzie jestes (katalog)
