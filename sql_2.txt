@@ -1,0 +1,36 @@
+DELETE FROM postac WHERE id_postaci=4;
+DELETE FROM postac WHERE id_postaci=5;
+
+ALTER TABLE walizka DROP FOREIGN KEY FK_WALIZKAPOSTAC;
+ALTER TABLE przetwory DROP FOREIGN KEY FK_wynkonawcaPostac;
+ALTER TABLE przetwory DROP FOREIGN KEY FK_konsumentPostac;
+ALTER TABLE postac MODIFY id_postaci INT NOT NULL;
+ALTER TABLE postac DROP primary key;
+ALTER TABLE postac DROP COLUMN id_postaci;
+
+ALTER TABLE postac ADD COLUMN pesel VARCHAR(11)FIRST;
+UPDATE postac SET pesel='01111111111' WHERE nazwa='Bjorn';
+UPDATE postac SET pesel='01111111112' WHERE nazwa='Drozd';
+UPDATE postac SET pesel='01111111113' WHERE nazwa='Tesciowa';
+UPDATE postac SET pesel='01111111114' WHERE nazwa='wiking3';
+UPDATE postac SET pesel='01111111115' WHERE nazwa='wiking4';
+UPDATE postac SET pesel='01111111116' WHERE nazwa='wiking5';
+ALTER TABLE postac ADD PRIMARY KEY(pesel);
+
+ALTER TABLE postac MODIFY COLUMN rodzaj enum('wiking','ptak','kobieta','syrena');
+
+INSERT INTO postac(pesel,nazwa,rodzaj,data_ur,wiek) values ('01101011011','Gertruda Nieszczera', 'syrena', '800-01-01',1200);
+
+UPDATE postac SET statek=1 where nazwa like '%a%';
+
+UPDATE statek SET max_ladownosc=(max_ladownosc*1.30) WHERE data_wodowania 
+BETWEEN CAST('1900-12-31' AS DATE) AND CAST('2001-01-01' AS DATE);
+
+ALTER TABLE postac ADD CONSTRAINT C_wiek CHECK(wiek<1000);
+
+INSERT INTO postac(pesel,nazwa,rodzaj,data_ur,wiek) values ('01010101111','Waz Loko','ptak','1920-12-11',80);
+
+CREATE TABLE marynarz(pesel varchar(11) primary key NOT NULL, nazwa varchar(40), 
+rodzaj enum('wiking', 'ptak', 'kobieta','syrena'), data_ur date, wiek int unsigned, funkcja varchar(50),statek int);
+
+INSERT INTO marynarz (pesel,nazwa,rodzaj,data_ur,wiek,funkcja,statek) SELECT pesel,nazwa,rodzaj,data_ur,wiek,funkcja,statek FROM postac where statek is not null;

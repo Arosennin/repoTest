@@ -28,3 +28,4 @@ UPDATE postac SET statek=1;
 DELETE from izba where nazwa_izby='spizarnia';
 
 drop table izba;
+
