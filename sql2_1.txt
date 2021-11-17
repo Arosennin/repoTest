@@ -1,0 +1,24 @@
+ALTER TABLE marynarz ADD CONSTRAINT ms_const  FOREIGN KEY(statek) REFERENCES statek(nazwa_statku);
+
+ZADANIE 5:
+UPDATE postac SET statek=null;
+UPDATE marynarz SET statek=null;
+
+DELETE FROM postac where nazwa='wiking5';
+
+DELETE FROM statek;
+
+ ALTER TABLE postac DROP FOREIGN KEY postac_ibfk_1;
+ 
+ ALTER TABLE marynarz DROP FOREIGN KEY ms_const;
+
+DROP TABLE statek;
+
+ CREATE TABLE zwierz (id INT PRIMARY KEY AUTO_INCREMENT, nazwa varchar(255), wiek int);
+
+ INSERT INTO zwierz(nazwa, wiek) SELECT nazwa, wiek FROM postac where rodzaj='ptak';
+ 
+ 
+
+
+ 

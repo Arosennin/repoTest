@@ -34,3 +34,4 @@ CREATE TABLE marynarz(pesel varchar(11) primary key NOT NULL, nazwa varchar(40),
 rodzaj enum('wiking', 'ptak', 'kobieta','syrena'), data_ur date, wiek int unsigned, funkcja varchar(50),statek int);
 
 INSERT INTO marynarz (pesel,nazwa,rodzaj,data_ur,wiek,funkcja,statek) SELECT pesel,nazwa,rodzaj,data_ur,wiek,funkcja,statek FROM postac where statek is not null;
+
