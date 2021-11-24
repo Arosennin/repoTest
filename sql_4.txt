@@ -1,0 +1,19 @@
+Zadanie 1:
+SELECT AVG(waga) FROM kreatura WHERE rodzaj='wiking';
+ SELECT AVG(waga), COUNT(idKreatury), rodzaj FROM kreatura GROUP BY rodzaj;
+ SELECT AVG(2021-YEAR(dataUr)), rodzaj FROM kreatura group by rodzaj;
+SELECT AVG(2021-YEAR(dataUr)), rodzaj FROM kreatura group by rodzaj;
+
+Zadanie 2:
+SELECT  SUM(waga), rodzaj FROM zasob group by rodzaj;
+SELECT avg(waga), nazwa from zasob WHERE ilosc>=4 group by nazwa HAVING sum(waga)>10;
+SELECT count(nazwa), rodzaj FROM zasob group by rodzaj;
+
+Zadanie 3:
+select count(ekwipunek.idZasobu),kreatura. nazwa FROM kreatura INNER JOIN ekwipunek on kreatura.idKreatury=ekwipunek.idKreatury group by nazwa;
+ SELECT kreatura.nazwa, zasob.nazwa FROM kreatura, zasob INNER JOIN ekwipunek ON zasob.idZasobu=ekwipunek.idZasobu WHERE kreatura.idKreatury = ekwipunek.idKreatury;
+select * from kreatura where idKreatury not in(SELECT idKreatury FROM ekwipunek where idKreatury is not null);
+
+zadanie 4:
+SELECT DISTINCT kreatura.nazwa, zasob.nazwa FROM kreatura, zasob NATURAL JOIN ekwipunek where year(dataUr) between 1670 and 1679 and kreatura.idKreatury = ekwipunek.idKreatury and zasob.idZasobu = ekwipunek.idZasobu;
+SELECT nazwa, dataUr FROM kreatura WHERE idKreatury in(SELECT idKreatury from ekwipunek WHERE idZasobu in(SELECT idZasobu from zasob WHERE rodzaj = 'jedzenie') ) order by dataUr desc LIMIT 5;

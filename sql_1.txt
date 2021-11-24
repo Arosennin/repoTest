@@ -76,4 +76,3 @@ CONSTRAINT FK_konsumentPostac FOREIGN KEY(id_konsumenta) REFERENCES postac(id_po
 INSERT INTO przetwory(id_wykonawcy, zawartosc, id_konsumenta) VALUES
 (3, 'bigos', 1);
 
-ZADANIE 5:

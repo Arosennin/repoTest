@@ -27,3 +27,12 @@ SELECT * FROM kreatura ORDER BY dataUr limit 5;
 
 Zadanie 4:
 Select distinct rodzaj from zasob;
+select CONCAT(nazwa, rodzaj) as kolumna from kreatura where rodzaj like 'wi%';
+SELECT nazwa, waga*ilosc as calkowita_waga, dataPozyskania, rodzaj from zasob WHERE YEAR(dataPozyskania) BETWEEN 2000 AND 2007;
+
+
+Zadanie 5:
+SELECT nazwa, waga*0.70*ilosc as masaJedzenia, waga*0.30*ilosc as wagaOdpadow, dataPozyskania, rodzaj FROM zasob where
+rodzaj='jedzenie';
+SELECT * FROM zasob WHERE rodzaj is null;
+SELECT DISTINCT rodzaj FROM zasob WHERE nazwa like 'Ba%' or nazwa like '%os';
