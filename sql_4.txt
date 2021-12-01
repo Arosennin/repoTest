@@ -17,3 +17,4 @@ select * from kreatura where idKreatury not in(SELECT idKreatury FROM ekwipunek 
 zadanie 4:
 SELECT DISTINCT kreatura.nazwa, zasob.nazwa FROM kreatura, zasob NATURAL JOIN ekwipunek where year(dataUr) between 1670 and 1679 and kreatura.idKreatury = ekwipunek.idKreatury and zasob.idZasobu = ekwipunek.idZasobu;
 SELECT nazwa, dataUr FROM kreatura WHERE idKreatury in(SELECT idKreatury from ekwipunek WHERE idZasobu in(SELECT idZasobu from zasob WHERE rodzaj = 'jedzenie') ) order by dataUr desc LIMIT 5;
+SELECT a.nazwa, b.nazwa FROM kreatura a LEFT JOIN kreatura b ON a.idKreatury=b.idKreatury-5;

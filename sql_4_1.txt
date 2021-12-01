@@ -1,0 +1,4 @@
+ZADANIE 5:
+SELECT kreatura.rodzaj, AVG(zasob.ilosc*zasob.waga) FROM kreatura JOIN ekwipunek LEFT OUTER JOIN zasob ON kreatura.idKreatury=ekwipunek.idKreatury AND zasob.idZasobu = ekwipunek.idZasobu WHERE kreatura.rodzaj != "malpa" AND kreatura.rodzaj != "waz" AND ekwipunek.ilosc<30 GROUP BY kreatura.rodzaj;
+SELECT rodzaj, nazwa, dataUr FROM kreatura WHERE dataUr =(SELECT dataUr FROM kreatura ORDER BY dataUr DESC LIMIT 1) UNION
+SELECT rodzaj, nazwa, dataUr FROM kreatura WHERE dataUr =(SELECT dataUr FROM kreatura ORDER BY dataUr ASC LIMIT 1);
